@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="customerSystemDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bills">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_id" Type="int" Nullable="false" />
+    <Property Name="bill_total" Type="int" Nullable="false" />
+    <Property Name="bill_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="customer_surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="customer_phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="customer_address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="schedule_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="schedule_id" />
+    </Key>
+    <Property Name="schedule_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="schedule_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="schedule_speed" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Bills_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_Schedule">
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schedule">
+        <PropertyRef Name="schedule_id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="schedule_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="customerSystemDbModelStoreContainer">
+    <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bills_Customers" Association="Self.FK_Bills_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_Schedule" Association="Self.FK_Customers_Schedule">
+      <End Role="Schedule" EntitySet="Schedule" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

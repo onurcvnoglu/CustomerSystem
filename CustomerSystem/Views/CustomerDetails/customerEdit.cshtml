@@ -1,0 +1,70 @@
+﻿@model CustomerSystem.ViewModels.CustomerEditVM
+
+@{
+    ViewBag.Title = "customerEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.customer_id)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div style="padding-top:3rem;">
+        <table class="table table-striped table-dark" style="padding-top:2rem;">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.customer_name)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.customer_surname)
+
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.customer_phone)
+
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.customer_address)
+
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.ScheduleList)
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.customer_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.customer_name, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.customer_surname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.customer_surname, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.customer_phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.customer_phone, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.customer_address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.customer_address, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.schedule_id, Model.ScheduleList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.customer_address, "", new { @class = "text-danger" })
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Kaydet" class="btn btn-success" />
+        @Html.ActionLink("Geri Dön", "customerDetail")
+    </div>
+}
