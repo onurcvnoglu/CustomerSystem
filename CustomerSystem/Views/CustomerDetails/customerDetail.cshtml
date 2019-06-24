@@ -1,68 +1,75 @@
-﻿@model IEnumerable<CustomerSystem.ViewModels.CustomerVM>
+﻿@*@model IEnumerable<CustomerSystem.ViewModels.CustomerVM>*@
+@model PagedList.IPagedList<CustomerSystem.ViewModels.CustomerVM>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "customerDetail";
 }
 
 <p style="margin-top:1rem">
-    @Html.ActionLink("Yeni Oluştur", "customerCreate" ,"CustomerDetails", new { @class="btn btn-success" })
+    @Html.ActionLink("Yeni Oluştur", "customerCreate", "CustomerDetails", new { @class = "btn btn-success" })
 </p>
 <table class="table table-striped table-dark" style="padding-top:2rem;">
     <thead>
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.customer_id)
+                @Html.DisplayName("XDSL No")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.customer_name)
+                @Html.DisplayName("Ad")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.customer_surname)
+                @Html.DisplayName("Soyad")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.customer_phone)
+                @Html.DisplayName("Telefon No")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.customer_address)
+                @Html.DisplayName("Adres")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.schedule_name)
+                @Html.DisplayName("Tarife Adı")
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.schedule_speed)
+                @Html.DisplayName("Tarife Hızı")
             </th>
             <th scope="col"></th>
         </tr>
     </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <th scope="col">
-            @Html.DisplayFor(modelItem => item.customer_id)
-        </th>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer_surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer_phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer_address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.schedule_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.schedule_speed)
-        </td>
-        <td>
-            @Html.ActionLink("Düzenle", "customerEdit", new { id=item.customer_id } , new { @class="btn btn-warning" }) |
-            @Html.ActionLink("Sil", "customerDelete", new {  id=item.customer_id  }, new { @class="btn btn-danger" , onclick = "return confirm('Bu kullanıcıyı silmek istiyor musunuz?');" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th scope="col">
+                @Html.DisplayFor(modelItem => item.customer_id)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.schedule_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.schedule_speed)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "customerEdit", new { id = item.customer_id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Sil", "customerDelete", new { id = item.customer_id }, new { @class = "btn btn-danger", onclick = "return confirm('Bu kullanıcıyı silmek istiyor musunuz?');" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("customerDetail", new { page, pageSize = Model.PageSize }))
+
+Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.

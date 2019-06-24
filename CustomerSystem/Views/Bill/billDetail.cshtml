@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CustomerSystem.ViewModels.BillVm>
+﻿@*@model IEnumerable<CustomerSystem.ViewModels.BillVm>*@
+@model PagedList.IPagedList<CustomerSystem.ViewModels.BillVm>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "billDetail";
@@ -9,47 +11,53 @@
     @Html.ActionLink("Yeni Oluştur", "billCreate", "Bill", new { @class = "btn btn-success" })
 </p>
 <table class="table table-striped table-dark" style="padding-top:2rem;">
+
     <tr>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.customer_id)
+            @Html.DisplayName("Müşteri No")
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.customer_name)
+            @Html.DisplayName("Ad")
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.customer_surname)
+            @Html.DisplayName("Soyad")
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.bill_total)
+            @Html.DisplayName("Toplam Tutar")
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.bill_date)
+            @Html.DisplayName("Tarih")
         </th>
         <th scope="col"></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td scope="col">
-        @Html.DisplayFor(modelItem => item.customer_id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.customer_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.customer_surname)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.bill_total)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.bill_date)
-    </td>
-    <td>
-        @Html.ActionLink("Düzenle", "billEdit", new {  id=item.bill_id  }, new { @class="btn btn-warning" }) |
-        @Html.ActionLink("Sil", "billDelete", new {  id=item.bill_id }, new { @class="btn btn-danger", onclick="return confirm('Bu faturayı silmek istiyor musunuz?');" })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td scope="col">
+                @Html.DisplayFor(modelItem => item.customer_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bill_total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bill_date)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "billEdit", new { id = item.bill_id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Sil", "billDelete", new { id = item.bill_id }, new { @class = "btn btn-danger", onclick = "return confirm('Bu faturayı silmek istiyor musunuz?');" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("billDetail", new { page, pageSize = Model.PageSize }))
+
+Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.

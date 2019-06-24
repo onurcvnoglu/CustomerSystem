@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CustomerSystem.ViewModels;
 using CustomerSystem.Models;
 using System.Data.Entity;
+using PagedList;
 
 namespace CustomerSystem.Controllers
 {
@@ -13,7 +14,7 @@ namespace CustomerSystem.Controllers
     {
         customerSystemDbEntities db = new customerSystemDbEntities();
         // GET: Bill
-        public ActionResult billDetail()
+        public ActionResult billDetail(int page=1,int pageSize=10)
         {
             List<BillVm> billVmList = new List<BillVm>();
 
@@ -32,7 +33,8 @@ namespace CustomerSystem.Controllers
                 billVm.bill_date = item.bill_date;
                 billVmList.Add(billVm);
             }
-            return View(billVmList);
+            PagedList<BillVm> billInfo = new PagedList<BillVm>(billVmList, page, pageSize);
+            return View(billInfo);
         }
         private IEnumerable<SelectListItem> GetCustomerList()
         {

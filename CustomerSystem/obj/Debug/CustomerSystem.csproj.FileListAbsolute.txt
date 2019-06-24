@@ -71,3 +71,7 @@ C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\EntityFramework
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\EntityFramework.SqlServer.dll
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\EntityFramework.xml
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\EntityFramework.SqlServer.xml
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.dll
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.dll
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.xml
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.xml

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using CustomerSystem.Models;
 using CustomerSystem.ViewModels;
+using PagedList;
 
 namespace CustomerSystem.Controllers
 {
@@ -15,7 +16,7 @@ namespace CustomerSystem.Controllers
         private customerSystemDbEntities db = new customerSystemDbEntities();
         
         // GET: CustomerDetails
-        public ActionResult customerDetail()
+        public ActionResult customerDetail(int page=1,int pageSize=10)  //sayfalama işlemi page = başlangıç , pagesize 1 sayfadaki satır sayısı
         {
             List<CustomerVM> customerVMList = new List<CustomerVM>();  //bilgileri tutmak için bir liste oluşturduk
             var customerlist = (from Cust in db.Customers
@@ -36,7 +37,8 @@ namespace CustomerSystem.Controllers
 
                 customerVMList.Add(customerVM);
             }
-            return View(customerVMList);
+            PagedList<CustomerVM> customerInfo = new PagedList<CustomerVM>(customerVMList, page, pageSize); //customerInfo değişkenine sayfalayıp attık. 
+            return View(customerInfo);
         }
         private IEnumerable<SelectListItem> GetScheduleList()   // listeye aldık 
         {
