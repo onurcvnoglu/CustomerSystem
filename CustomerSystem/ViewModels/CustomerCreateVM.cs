@@ -20,8 +20,6 @@ namespace CustomerSystem.ViewModels
 
         [Required(ErrorMessage = "Telefon Numarası Boş Bırakılamaz")]
         [Display(Name = "Telefon No")]
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Doğru Bir Numara Giriniz")]
         public string customer_phone { get; set; }
 
         [Required]
@@ -35,5 +33,6 @@ namespace CustomerSystem.ViewModels
         [Required]
         [DisplayName("Tarife Adı")]
         public IEnumerable<SelectListItem> scheduleList { get; set; }
+        public IEnumerable<SelectListItem> countryList { get; set; }
     }
 }

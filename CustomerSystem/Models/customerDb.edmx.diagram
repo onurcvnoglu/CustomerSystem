@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="customerSystemDbModel.Schedule" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="customerSystemDbModel.FK_Bills_Customers" />
         <AssociationConnector Association="customerSystemDbModel.FK_Customers_Schedule" />
+        <EntityTypeShape EntityType="customerSystemDbModel.CountriesCode" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

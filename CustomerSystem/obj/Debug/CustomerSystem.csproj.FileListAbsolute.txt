@@ -62,7 +62,6 @@ C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\System.Web.Webp
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\System.Web.Helpers.xml
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\System.Web.Mvc.xml
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Debug\CustomerSystem.csprojAssemblyReference.cache
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Debug\CustomerSystem.csproj.CoreCompileInputs.cache
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Debug\CustomerSystem.csproj.CopyComplete
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Debug\CustomerSystem.dll
@@ -75,3 +74,4 @@ C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.dll
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.dll
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.xml
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.xml
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Debug\CustomerSystem.csprojAssemblyReference.cache

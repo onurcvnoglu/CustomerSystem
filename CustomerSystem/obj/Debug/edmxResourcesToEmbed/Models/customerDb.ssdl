@@ -9,6 +9,14 @@
     <Property Name="bill_total" Type="int" Nullable="false" />
     <Property Name="bill_date" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="CountriesCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="country_code" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Customers">
     <Key>
       <PropertyRef Name="customer_id" />
@@ -58,6 +66,7 @@
   </Association>
   <EntityContainer Name="customerSystemDbModelStoreContainer">
     <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CountriesCode" EntityType="Self.CountriesCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Bills_Customers" Association="Self.FK_Bills_Customers">

@@ -52,6 +52,7 @@ namespace CustomerSystem.Controllers
         {
             BillCreateVM billCreateVM = new BillCreateVM();
             billCreateVM.customerList = GetCustomerList();
+            billCreateVM.bill_date = DateTime.Now.Date;
             return View(billCreateVM);
         }
         [HttpPost]

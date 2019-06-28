@@ -1,7 +1,8 @@
 ﻿@model CustomerSystem.ViewModels.CustomerCreateVM
+@using CustomerSystem.Helpers
 
 @{
-    ViewBag.Title = "customerCreate";
+    ViewBag.Title = "Yeni Müşteri Kaydı";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +17,6 @@
                 <tr>
                     <th scope="col">
                         @Html.DisplayNameFor(model => model.customer_name)
-
                     </th>
                     <th scope="col">
                         @Html.DisplayNameFor(model => model.customer_surname)
@@ -43,8 +43,10 @@
                         @Html.ValidationMessageFor(model => model.customer_surname, "", new { @class = "text-danger" })
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.customer_phone, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.customer_phone, "", new { @class = "text-danger" })
+                        <div class="input-group">
+                            @Html.NumberBox(model => model.customer_phone, Model.countryList)
+                            @Html.ValidationMessageFor(model => model.customer_phone, "", new { @class = "text-danger" })
+                        </div>
                     </td>
                     <td>
                         @Html.EditorFor(model => model.customer_address, new { htmlAttributes = new { @class = "form-control" } })

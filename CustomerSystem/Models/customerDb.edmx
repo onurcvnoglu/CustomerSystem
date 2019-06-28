@@ -14,6 +14,14 @@
           <Property Name="bill_total" Type="int" Nullable="false" />
           <Property Name="bill_date" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="CountriesCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="country_code" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="customer_id" />
@@ -63,6 +71,7 @@
         </Association>
         <EntityContainer Name="customerSystemDbModelStoreContainer">
           <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountriesCode" EntityType="Self.CountriesCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Bills_Customers" Association="Self.FK_Bills_Customers">
@@ -122,6 +131,7 @@
             <End Role="Schedule" EntitySet="Schedules" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="CountriesCodes" EntityType="customerSystemDbModel.CountriesCode" />
         </EntityContainer>
         <Association Name="FK_Bills_Customers">
           <End Type="customerSystemDbModel.Customer" Role="Customer" Multiplicity="1">
@@ -151,6 +161,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CountriesCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="country_code" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -185,6 +203,15 @@
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="schedule_name" ColumnName="schedule_name" />
                 <ScalarProperty Name="schedule_speed" ColumnName="schedule_speed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountriesCodes">
+            <EntityTypeMapping TypeName="customerSystemDbModel.CountriesCode">
+              <MappingFragment StoreEntitySet="CountriesCode">
+                <ScalarProperty Name="country_code" ColumnName="country_code" />
+                <ScalarProperty Name="country_name" ColumnName="country_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

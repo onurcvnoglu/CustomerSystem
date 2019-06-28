@@ -28,5 +28,6 @@ namespace CustomerSystem.Models
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<CountriesCode> CountriesCodes { get; set; }
     }
 }

@@ -71,3 +71,7 @@ C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Release\Custome
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Release\CustomerSystem.csproj.CopyComplete
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Release\CustomerSystem.dll
 C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\obj\Release\CustomerSystem.pdb
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.dll
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.dll
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.xml
+C:\Users\Netspeed\source\repos\CustomerSystem\CustomerSystem\bin\PagedList.Mvc.xml

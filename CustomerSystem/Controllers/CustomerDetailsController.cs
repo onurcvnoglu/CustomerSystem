@@ -20,7 +20,7 @@ namespace CustomerSystem.Controllers
         {
             List<CustomerVM> customerVMList = new List<CustomerVM>();  //bilgileri tutmak için bir liste oluşturduk
             var customerlist = (from Cust in db.Customers
-                                join sch in db.Schedules on Cust.schedule_id equals sch.schedule_id
+                                join sch in db.Schedules on Cust.schedule_id equals sch.schedule_id orderby Cust.customer_id
                                 select new { Cust.customer_id, Cust.customer_name, Cust.customer_surname, Cust.customer_phone, Cust.customer_address, sch.schedule_name, sch.schedule_speed });   //bizim için gerekli verileri aldık
 
             foreach (var item in customerlist)
@@ -40,6 +40,30 @@ namespace CustomerSystem.Controllers
             PagedList<CustomerVM> customerInfo = new PagedList<CustomerVM>(customerVMList, page, pageSize); //customerInfo değişkenine sayfalayıp attık. 
             return View(customerInfo);
         }
+        [HttpPost]
+        public ActionResult customerDetail(string txtArama, int page = 1, int pageSize = 10)    //Arama Butonu için
+        {
+            int txtId = Convert.ToInt32(txtArama);
+            List<CustomerVM> customerVMList = new List<CustomerVM>();
+            var customerSearch = db.Customers.Find(txtId);
+            if (customerSearch==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerVM customerVM = new CustomerVM();
+
+            customerVM.customer_id = customerSearch.customer_id;
+            customerVM.customer_name = customerSearch.customer_name;
+            customerVM.customer_surname = customerSearch.customer_surname;
+            customerVM.customer_phone = customerSearch.customer_phone;
+            customerVM.customer_address = customerSearch.customer_address;
+            customerVM.schedule_name = customerSearch.Schedule.schedule_name;
+            customerVM.schedule_speed = customerSearch.Schedule.schedule_speed;
+
+            customerVMList.Add(customerVM);
+            PagedList<CustomerVM> customerInfo = new PagedList<CustomerVM>(customerVMList, page, pageSize); //customerInfo değişkenine sayfalayıp attık. 
+            return View(customerInfo);
+        }
         private IEnumerable<SelectListItem> GetScheduleList()   // listeye aldık 
         {
             var sch = db.Schedules
@@ -52,10 +76,23 @@ namespace CustomerSystem.Controllers
 
             return (sch);
         }
+        private IEnumerable<SelectListItem> GetCountryCode()   // listeye aldık 
+        {
+            var cList = db.CountriesCodes
+                .Select(m => new SelectListItem
+                {
+                    Value = m.country_code.ToString(),
+                    Text = m.country_name
+                })
+                .ToList();
+
+            return (cList);
+        }
         public ActionResult customerCreate()
         {
             CustomerCreateVM customerCreateVM = new CustomerCreateVM();
             customerCreateVM.scheduleList= GetScheduleList();
+            customerCreateVM.countryList = GetCountryCode();
 
             //ViewBag.schedule_name = new SelectList(db.Schedules, "schedule_id", "schedule_name");
             return View(customerCreateVM);
@@ -69,13 +106,14 @@ namespace CustomerSystem.Controllers
                 customer_name = customerCreateVM.customer_name,
                 customer_surname = customerCreateVM.customer_surname,
                 customer_address = customerCreateVM.customer_address,
-                customer_phone = customerCreateVM.customer_phone,
+                customer_phone = customerCreateVM.customer_phone+Request.Form["codeNum"]+Request.Form["thirdNum"]+Request.Form["fourthNum"],
                 schedule_id = customerCreateVM.schedule_id
             };
             db.Customers.Add(model);
             db.SaveChanges();
             return RedirectToAction("customerDetail");
         }
+        
         public ActionResult customerEdit(int? id)
         {
             if (id==null)

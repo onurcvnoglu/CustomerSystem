@@ -44,6 +44,7 @@
       <End Role="Schedule" EntitySet="Schedules" />
       <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
+    <EntitySet Name="CountriesCodes" EntityType="customerSystemDbModel.CountriesCode" />
   </EntityContainer>
   <Association Name="FK_Bills_Customers">
     <End Type="customerSystemDbModel.Customer" Role="Customer" Multiplicity="1">
@@ -73,4 +74,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="CountriesCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="country_code" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>
